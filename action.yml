@@ -1,0 +1,21 @@
+name: Update env file
+description: Add or update environment variables in file
+inputs:
+  filename:
+    description: Path to the environment file
+    required: true
+    default: .env
+  variables:
+    description: Variables to add/update the file with
+    required: true
+  reset:
+    description: Whether the file has to be reset or just updated with the new variables
+    required: false
+    default: false
+  blanks:
+    description: When `ignore` variables with blank values are not updated, when `remove` they are removed from file, when `allow` they get assigned a blank value. Default is `ignore`.
+    required: false
+    default: ignore
+runs:
+  using: 'node12'
+  main: 'index.js'

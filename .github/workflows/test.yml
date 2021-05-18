@@ -1,0 +1,31 @@
+name: units-test
+on:
+  pull_request:
+  push:
+    branches:
+      - '**'
+
+jobs:
+
+  units:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm ci
+    - run: npm test
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: cat ./test/sample.env
+    - uses: ./
+      with:
+        filename: ./test/sample.env
+        variables: |
+          BACKEND_VERSION
+          FRONTEND_VERSION
+      env:
+        BACKEND_VERSION: 1.0.1
+        FRONTEND_VERSION: 1.3.0
+    - run: cat ./test/sample.env
